@@ -1,21 +1,24 @@
 package com.github.zawadamatt.dateapp.dto;
 
-import com.github.zawadamatt.dateapp.model.User;
 import com.github.zawadamatt.dateapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
-public class UserDTO {
+@Component
+public class UserDTO implements UserDetailsService {
+
+    UserRepository userRepository;
 
     @Autowired
-    UserRepository userRepository;
-    PasswordEncoder passwordEncoder;
-
-    public boolean isPassCorrect(String username, String password) {
-
-        User user = userRepository.findUserByUsername(username);
-
-        return user.getPassword().equals(passwordEncoder.encode(password));
+    public UserDTO(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findUserByUsername(username);
+    }
 }

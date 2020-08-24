@@ -1,11 +1,18 @@
 package com.github.zawadamatt.dateapp.model;
 
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +41,6 @@ public class User {
 
     @Column
     private String hairColor;
-
-    @Column
-    private double latitude;
-
-    @Column
-    private double longitude;
 
     @Column
     private String sexIntresting;
@@ -79,9 +80,36 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority("user"));
+    }
+
+
 
     public String getPassword() {
         return password;
@@ -139,21 +167,6 @@ public class User {
         this.hairColor = hairColor;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
 
     public String getSexIntresting() {
         return sexIntresting;
@@ -234,4 +247,5 @@ public class User {
     public void setUserList(List<User> userList) {
         this.userList = userList;
     }
+
 }

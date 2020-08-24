@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/html">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neumorphic Login - Free Bulma template</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+                return position.coords.latitude + "," + position.coords.longitude;
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        window.onload = getLocation();
+
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+                "<br>Longitude: " + position.coords.longitude;
+        }
+    </script>
+
+</head>
+<body onload="getLocation(), showPosition()">
+<section class="has hero is-primary is-small is-bold">
+    <div class="hero-body">
+        <div class="container">
+            <h1 class="title">
+                Aplikacja ! - Pierwsze zalogowanie !
+            </h1>
+        </div>
+    </div>
+</section>
+
+<p class="has-text-centered is-size-3">Witaj ! To twoje pierwsze zalogowanie, podaj dane :</p>
+<div class="hero-body"></div>
+<div class="columns">
+    <div class="column">
+
+    </div>
+    <div class="column">
+        <div class="container">
+            <form th:action="@{/user-data}" method="post">
+                <div class="field">
+                    <label class="label">Podaj swoje imię :</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Imię :" name="name" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Podaj swój wiek :</label>
+                    <div class="control">
+                        <input class="input" type="number" placeholder="Wiek: " name="age" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Podaj swoją płeć :</label>
+                    <div class="control">
+                        <div class="select">
+                            <select name="sex">
+                                <option name="male">Mezczyzna</option>
+                                <option name="female">Kobieta</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Podaj swój wzrost :</label>
+                        <div class="control">
+                            <input class="input" type="number" placeholder="Wzrost: " name="height" required>
+                        </div>
+                    </div>
+                    <label class="label">Długość włosów :</label>
+                    <div class="select">
+                        <select name="hair">
+                            <option name="short">Krótkie</option>
+                            <option name="middle">Średnie</option>
+                            <option name="long">Długie</option>
+                        </select>
+                    </div>
+                    <label class="label">Kolor włosów :</label>
+                    <div class="select">
+                        <select name="hairColor">
+                            <option name="blond">Blond</option>
+                            <option name="brown">Brązowe</option>
+                            <option name="black">Czarne</option>
+                            <option name="other">Inne</option>
+                        </select>
+                    </div>
+                    <label class="label">Kolor skóry :</label>
+                    <div class="select">
+                        <select name="skinColor">
+                            <option name="black">Czarny</option>
+                            <option name="white">Biały</option>
+                            <option name="yellow">Żółty</option>
+                            <option name="brown">Mulat/mulatka</option>
+                        </select>
+                    </div>
+                    <label class="label">Postóra :</label>
+                    <div class="select">
+                        <select name="bodyType">
+                            <option name="skinny">Szczupła</option>
+                            <option name="avarage">Przeciętna</option>
+                            <option name="big">Grubsza</option>
+                            <option name="bigB">Spaślak</option>
+                        </select>
+                    </div>
+                    <label class="label">Tatuaże :</label>
+                    <div class="select">
+                        <select name="tattos">
+                            <option name="true">true</option>
+                            <option name="false">false</option>
+                        </select>
+                    </div>
+                    <label class="label">Dzieci :</label>
+                    <div class="select">
+                        <select name="kids">
+                            <option name="true">true</option>
+                            <option name="false">false</option>
+                        </select>
+                    </div>
+                    <div class="control">
+                        <button class="button is-primary" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="column">
+
+    </div>
+</div>
+</body>
+</html>
